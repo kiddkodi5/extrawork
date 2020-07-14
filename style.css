@@ -58,6 +58,10 @@ h2{
     display: inline-block;
 }
 
+.error{
+	clear: left;
+	color: red;	
+}
 
 footer{
     clear: left;

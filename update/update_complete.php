@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント更新完了画面</title>
-	<link rel="stylesheet" type="text/css" href="style3.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	<style type="text/css">
 	<!--
 a:link  { color : white; text-decoration: none; }
@@ -56,7 +56,7 @@ $pdo->exec("update account set prefecture = '".$_POST['prefecture']."' where id=
 $pdo->exec("update account set address_1 = '".$_POST['address_1']."' where id= $id");
 $pdo->exec("update account set authority = '".$_POST['authority']."' where id= $id");
 $pdo->exec("update account set update_time = '".$date->format("Y-m-d H:i:s")."' where id= $id");
-echo '<h1>更新完了しました</h1>' ;
+echo '<h3>更新完了しました</h3>' ;
 }catch(PDOException $e){
 	echo 'エラーが発生したため、アカウントを更新できませんでした。';
 }

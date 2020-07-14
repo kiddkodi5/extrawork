@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント登録確認画面</title>
-	<link rel="stylesheet" type="text/css" href="style2.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	<style type="text/css">
 	<!--a:link  { color : white; text-decoration: none; }
 		a:visited  { color : white; text-decoration: none; }-->

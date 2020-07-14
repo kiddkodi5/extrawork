@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント登録画面</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	<style type="text/css">
 	<!--
 a:link  { color : white; text-decoration: none; }

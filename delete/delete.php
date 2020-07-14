@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント削除画面</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
 
 

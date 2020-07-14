@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント登録完了画面</title>
-	<link rel="stylesheet" type="text/css" href="style3.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	<style type="text/css">
 	<!--
 a:link  { color : white; text-decoration: none; }
@@ -40,7 +40,7 @@ try{
 
 	if(isset($_POST['family_name'],$_POST['first_name'], $_POST['family_name_kana'],$_POST['first_name_kana'], $_POST['mail'],$_POST['password'],$_POST['gender'], $_POST['postal_code'],$_POST['prefecture'], $_POST['address_1'], $_POST['address_2'],$_POST['authority'])){
 	$pdo->exec("insert into account(family_name, first_name, family_name_kana, first_name_kana, mail, password, gender, postal_code, prefecture, address_1, address_2, authority,registered_time)"."values('".$_POST['family_name']."', '".$_POST['first_name']."', '".$_POST['family_name_kana']."', '".$_POST['first_name_kana']."', '".$_POST['mail']."', '".$_POST['password']."', '".$_POST['gender']."', '".$_POST['postal_code']."', '".$_POST['prefecture']."', '".$_POST['address_1']."', '".$_POST['address_2']."', '".$_POST['authority']."', '".$date->format("Y-m-d H:i:s")."');");}
-	echo '<h1>登録完了しました</h1>';
+	echo '<h3>登録完了しました</h3>';
 	}catch(PDOException $e){
 	echo 'エラーが発生したためアカウント登録できません。';
 }

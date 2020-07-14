@@ -1,0 +1,75 @@
+<html lang="ja">
+
+	
+<head>
+	<meta charset="utf-8">
+	<title>アカウント削除完了画面</title>
+	<link rel="stylesheet" type="text/css" href="style2.css">
+	</head>
+
+
+<body>
+	  
+	  <img src="../diblog_logo.jpg">
+    <header>  
+    <ul>
+        <li>トップ</li>
+        <li>プロフィール</li>
+        <li>D.I.Blogについて</li>
+        <li>登録フォーム</li>
+		<li><a href="../list/list.php">アカウント一覧</a></li>
+		<li><a href="../regist/regist.php">アカウント登録</a></li>
+        <li>問い合わせ</li>
+        <li>その他</li>
+       </ul>
+    </header>
+	
+	<h3>アカウント削除完了画面</h3>
+	
+	<?php
+	$database_error = false;
+	try{
+	mb_internal_encoding("utf-8");
+
+	$pdo = new PDO("mysql:dbname=assighment;host=localhost;", "root", "root");
+	
+	if(isset($_POST['id'])){
+		$id = $_POST['id'];
+	echo $id;
+	
+	
+	$stmt = $pdo->exec("update account set delete_flag = '1' where id =$id");
+	}
+	$pdo = null;
+	}catch(PDOException $e){
+		echo 'エラーが発生しました。';
+		$database_error = true;
+	}
+	if($database_error == false){
+?>
+	
+
+	
+	
+	
+	<div class="confirm">削除完了しました</div>
+			
+		<?php } ?>
+		<form method="post" action="../index.html">
+			<input type="submit" name="back" value="TOPページに戻る"></form>
+		
+	
+	
+	<footer>Copyright D.I.works| D.I.Blog is the one which provides A to Z about programming.</footer>
+
+	
+	</body>
+
+
+
+
+
+
+
+
+</html>

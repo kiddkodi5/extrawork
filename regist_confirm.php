@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント登録確認画面</title>
-	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<style type="text/css">
 	<!--a:link  { color : white; text-decoration: none; }
 		a:visited  { color : white; text-decoration: none; }-->
@@ -11,14 +11,14 @@
 </head>
 	
 <body>
-	<img src="../diblog_logo.jpg">
+	<img src="diblog_logo.jpg">
     <header>  
     	<ul>
-			<li>トップ</li>
+			<li><a href="index.php">トップ</a></li>
 			<li>プロフィール</li>
 			<li>D.I.Blogについて</li>
 			<li>登録フォーム</li>
-			<li><a href ="../list/list.php">アカウント一覧</a></li>
+			<li><a href ="list.php">アカウント一覧</a></li>
 			<li><a href="regist.php">アカウント登録</a></li>
 			<li>問い合わせ</li>
 			<li>その他</li>

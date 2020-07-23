@@ -13,12 +13,12 @@
 	  <img src="../diblog_logo.jpg">
     <header>  
     <ul>
-        <li>トップ</li>
+        <li><a href="index.php">トップ</a></li>
         <li>プロフィール</li>
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
-		<li><a href="../list/list.php">アカウント一覧</a></li>
-		<li><a href="../regist/regist.php">アカウント登録</a></li>
+		<li><a href="list.php">アカウント一覧</a></li>
+		<li><a href="regist.php">アカウント登録</a></li>
         <li>問い合わせ</li>
         <li>その他</li>
        </ul>
@@ -55,7 +55,7 @@
 	<div class="confirm">削除完了しました</div>
 			
 		<?php } ?>
-		<form method="post" action="../index.html">
+		<form method="post" action="index.php">
 			<input type="submit" name="back" value="TOPページに戻る"></form>
 		
 	

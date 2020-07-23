@@ -14,12 +14,12 @@
 	  <img src="../diblog_logo.jpg">
     <header>  
     <ul>
-        <li>トップ</li>
+        <li><a href="index.php">トップ</a></li>
         <li>プロフィール</li>
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
-		<li><a href="../list/list.php">アカウント一覧</a></li>
-		<li><a href="../regist/regist.php">アカウント登録</a></li>
+		<li><a href="list.php">アカウント一覧</a></li>
+		<li><a href="regist.php">アカウント登録</a></li>
         <li>問い合わせ</li>
         <li>その他</li>
        </ul>
@@ -52,7 +52,7 @@
 	
 	echo '本当に削除してよろしいですか？';
 	echo '<p><button type="button" onclick="history.back()">前に戻る</button></p>';
-	echo'<form method="post" action="../delete/delete_complete.php">
+	echo'<form method="post" action="delete_complete.php">
 	<input type="submit" name="delete" value="削除する">
 	<input type="hidden" name="id" value="<?php echo $id; ?>">
 	</form>';

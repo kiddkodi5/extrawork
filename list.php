@@ -13,15 +13,15 @@
 
 <body>
 	  
-	  <img src="../diblog_logo.jpg">
+	  <img src="diblog_logo.jpg">
     <header>  
     <ul>
-        <li>トップ</li>
+        <li><a href="index.php">トップ</a></li>
         <li>プロフィール</li>
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
 		<li><a href="list.php">アカウント一覧</a></li>
-		<li><a href="../regist/regist.php">アカウント登録</a></li>
+		<li><a href="regist.php">アカウント登録</a></li>
         <li>問い合わせ</li>
         <li>その他</li>
        </ul>
@@ -115,13 +115,13 @@
 		<td><?php echo $row['update_time']; ?></td>
 		<!--余裕があったらで構いません。ぜひ表示する日付のフォーマットをいじってあげてくだしい-->
 		<td>
-			<form method="post" action="../update/update.php">
+			<form method="post" action="update.php">
 			<input type="submit" name="update" value="更新">
 				<input type="hidden" value="<?php echo $row['id']; ?>" name="id">
 				
 			</form>
 			
-			<form method="post" action="../delete/delete.php">
+			<form method="post" action="delete.php">
 			<input type="submit" name="delete" value="削除">
 				<input type="hidden" value="<?php echo $row['id']; ?>" name="id">
 				

@@ -7,21 +7,21 @@
 <head>
 	<meta charset="utf-8">
 	<title>アカウント更新画面</title>
-	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
 
 <body>
 	  
-	  <img src="../diblog_logo.jpg">
+	  <img src="diblog_logo.jpg">
     <header>  
     <ul>
-        <li>トップ</li>
+        <li><a href="index.php">トップ</a></li>
         <li>プロフィール</li>
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
-		<li><a href="../list/list.php">アカウント一覧</a></li>
-		<li><a href="../regist/regist.php">アカウント登録</a></li>
+		<li><a href="list.php">アカウント一覧</a></li>
+		<li><a href="regist.php">アカウント登録</a></li>
         <li>問い合わせ</li>
         <li>その他</li>
        </ul>
@@ -184,7 +184,7 @@
 			
 <?php }}else{
 	echo 'アカウントが選択されていません。';
-	echo '<form method="post" action="../list/list.php">
+	echo '<form method="post" action="list/list.php">
 				<input type="submit" name="list_back" value="アカウント一覧に戻る"></form>';
 } ?>
 	

@@ -31,7 +31,8 @@ if(isset($_POST['destroy'])){
 
 <h3>ログイン画面</h3>
 
-<form method=post action="index.php">
+<form method=post action="<?php if(isset($_POST['page_code'])){echo "list.php";}else{echo "index.php";}?>">
+	
 	
 	<h4>メールアドレス</h4>
 <input type="text" size="30" name="mail" maxlength="100"

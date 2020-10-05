@@ -15,7 +15,7 @@ session_start();
 	//セッションに値が入っていればポストと共有
 	if(isset($_SESSION['mail'])){
 		$_POST['mail'] = $_SESSION['mail'];
-		$_POST['password'] =$_SESSION['password'];
+		
 	}
 //DB接続
 try{
@@ -47,6 +47,7 @@ try{
 		if(password_verify($_POST['password'], $row['password'])){
 		$_SESSION['mail'] = $row['mail'];
 		$_SESSION['password'] = $row['password'];
+		$_SESSION['id'] = $row['id'];
 		echo 'ログインしました。';
 		}else{
 		?>

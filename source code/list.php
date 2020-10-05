@@ -1,5 +1,112 @@
+<?php
+session_start();
 
+			/*mb_internal_encoding("utf-8");
+			
+			try{$pdo = new PDO("mysql:dbname=assighment;host=localhost;","root","root");
+			echo $_SESSION['mail']."1";	*/
+				/*//$row['authority']を取得する
+				//その$row['authority']をセッションに入れる
+				//そのセッションが０か１かによって再度ログインページに飛ばすかどうか判断
+			if(isset($_POST['mail'])){
+				$_SESSION['mail'] = $_POST['mail'];
+				$mail = $_POST['mail'];
+				$stmt = $pdo->prepare("select * from account where mail = $mail");
+				$stmt->execute([$_POST['mail']]);
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
+				$rows[] = $row;
+				echo $row['authority'];
+			}*/
+//アカウントを持っていない人が直接このページにアクセスした場合はログインが必要であることを表示の上、ログインページへ誘導
+		if(empty($_SESSION['mail'])){
+			if(empty($_POST['mail'])){
+				require_once("body_top.php");
+				echo '</br>ログインしてください。</br>';
+				echo '<form method="post" action="login.php"><input type="hidden" value="a" name="page_code"><input type="submit" value="ログインページへ進む"></form>';
+				require_once("footer.php");
+				exit();
+			}
+		}
+	
+		try{
+	$pdo = new PDO("mysql:dbname=assighment;host=localhost;", "root", "root");
+	$stmt = $pdo->prepare('select * from account where mail = ?');
+	$stmt->execute([$_SESSION['mail']]);
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+}catch(PDOException $e){
+	echo "エラー発生したため、ログイン情報が取得できません。";
+	echo $e->getMessage();
+	die();
+}
+if(!isset($row['mail'])){
+			require_once("body_top.php");
+			echo '</br>メールアドレスまたはパスワードが間違っています。1';
+			echo '<form method="post" action="login.php"><input type="submit" value="ログインページへ戻る"></form>';
+			require_once("footer.php");
+			exit();
+		}
+			
+		if(!isset($_SESSION['password'])){
+			echo 'post:'.$_POST['password'];
+			echo 'row:'.$row['password'];
+		if(password_verify($_POST['password'], $row['password'])){
+		$_SESSION['mail'] = $row['mail'];
+		$_SESSION['password'] = $row['password'];
+		$_SESSION['id'] = $row['id'];
+		echo 'ログインしました。';
+		}else{
+?>
 
+<!DOCTYPE html>
+		<html lang="ja">
+
+			<head>
+		<meta charset="utf-8">
+		<title>トップページ</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+			</head>
+		<?php
+			require_once("body.php");
+			echo '</br>メールアドレスまたはパスワードが間違っています。';
+		?>
+			<form method="post" action="login.php">
+				<input type="hidden" name="mail" value="<?php echo $_POST['mail'] ?>">
+				<input type="submit" value="ログイン画面に戻る。">
+			</form>
+			  
+		<?php
+				require_once("footer.php");
+		/*header('Location: http://localhost/account/extrawork/extrawork/login.php');*/
+			/*session_destroy();*/
+			exit();
+		}
+		}
+?>
+			<!DOCTYPE html>
+		<html lang="ja">
+
+			<head>
+		<meta charset="utf-8">
+		<title>トップページ</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+			</head>
+			<?php
+			
+		if($row['authority'] == 0){
+			require_once("body.php");
+			echo '<br>';
+			echo 'アカウントの権限がありません。';
+			?>
+			<form method="post" action="index.php">
+				<input type="hidden" name="mail" value="<?php echo $_POST['mail'] ?>">
+				<input type="submit" value="トップページに戻る。">
+			</form>
+			<?php
+				require_once("footer.php");
+			exit();
+		}
+	/*	}*/
+		?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -45,20 +152,21 @@
 		</tr>
 		<tr>
 			<td>メールアドレス</td>	
-				<td><input type="text" name="mail" value="<?php if(isset($_POST['mail'])){echo $_POST['mail'];} ?>"></td>
+				<td><input type="text" name="mail" value="<?php if(isset($_POST['mail']) and isset($_POST['family_name'])){echo $_POST['mail'];} ?>"></td>
 			<td>性別</td>
-				<td><input type="radio" name="gender" value="0" <?php if(isset($_POST['gender'])){if($_POST['gender'] == 0){echo 'checked';}}?>>男
+				<td><input type="radio" name="gender" value="0" <?php if(!isset($_POST['gender']) or $_POST['gender'] == 0){echo 'checked';}?>>男
 					<input type="radio" name="gender" value="1" <?php if(isset($_POST['gender'])){if($_POST['gender'] == 1){echo 'checked';}}?>>女
-					<input type="radio" name="gender" value="2" <?php if(!isset($_POST['gender']) or $_POST['gender'] == 2){echo 'checked';}?>>なし
+					<input type="radio" name="gender" value="2" <?php if(isset($_POST['gender'])){if($_POST['gender'] == 2){echo 'checked';}}?>>なし
 				</td>
 		</tr>
 		<tr>
 			<td>権限</td>
 				<td><select class="dropdown" name="authority">
-						<option value="0" <?php if(isset($_POST['authority'])){if($_POST['authority'] == 0){echo 'selected';}}?>>一般</option>
+						<option value="0" <?php if(!isset($_POST['authority']) or $_POST['authority'] == 0){echo 'selected';}?>>一般</option>
 						<option value="1" <?php if(isset($_POST['authority'])){if($_POST['authority'] == 1){echo 'selected';}}?>>管理者</option>
-						<option value="2" <?php if(!isset($_POST['authority']) or $_POST['authority'] == 2){echo 'selected';}?>>なし</option>
-					</select></td>
+						<option value="2" <?php if(isset($_POST['authority'])){if($_POST['authority'] == 2){echo 'selected';}}?>>なし</option>
+					</select>
+				</td>
 			<td><input type="submit" class="submit" value="検索"></td>
 		</tr>
 		</table>
@@ -67,21 +175,16 @@
 	
 	
 	<?php
-			mb_internal_encoding("utf-8");
-			
-			try{
-				$pdo = new PDO("mysql:dbname=assighment;host=localhost;","root","root");
-			/*echo '接続成功';*/
+			if(isset($_POST['family_name'])){
+				$family_name = $_POST['family_name'];
+				$first_name = $_POST['first_name'];
+				$family_name_kana = $_POST['family_name_kana'];
+				$first_name_kana = $_POST['first_name_kana'];
+				$mail = $_POST['mail'];
+				$gender = $_POST['gender'];
+				$authority = $_POST['authority'];
 				
-	if(isset($_POST['family_name'])){
-		$family_name = $_POST['family_name'];
-		$first_name = $_POST['first_name'];
-		$family_name_kana = $_POST['family_name_kana'];
-		$first_name_kana = $_POST['first_name_kana'];
-		$mail = $_POST['mail'];
-		$gender = $_POST['gender'];
-		$authority = $_POST['authority'];
-					
+				$stmt = $pdo->query("select id from account where mail = $mail");
 				
 				
 		/*	↓全部の値が空でなおかつ性別＆権限が２（なし）の時＝そのまま検索ボタン押下*/
@@ -214,6 +317,7 @@
 	<?php
 	foreach((array)$rows as $row){
 		//(array)はforeachが扱うことのできるデータが”配列”もしくは”オブジェクト”のため、配列化にする。
+		//https://qiita.com/takuma-jpn/items/678876ad12b9ae9998ac
 		//isset($rows)をおくことによって該当する項目がなかった場合を定義し、何もDBから値が得られなかった場合にはfalseを返す
 	?>
 	
@@ -225,37 +329,37 @@
 		<td><?php echo $row['first_name_kana']; ?></td>
 		<td><?php echo $row['mail']; ?></td>
 		<td><?php 
-	$gender = $row['gender'];
-		switch($gender){
-			case 0:
-				echo '男';
-				break;
-			case 1:
-				echo '女';
-				break;
-		}
+					$gender = $row['gender'];
+						switch($gender){
+							case 0:
+								echo '男';
+								break;
+							case 1:
+								echo '女';
+								break;
+						}
 		?></td>
 		<td><?php 
-		$authority = $row['authority'];
-		switch($authority){
-			case 0:
-				echo '一般';
-				break;
-			case 1:
-				echo '管理者';
-				break;
-		}
+					$authority = $row['authority'];
+					switch($authority){
+						case 0:
+							echo '一般';
+							break;
+						case 1:
+							echo '管理者';
+							break;
+					}
 		?></td>
 		<td><?php 
-		$delete_flag = $row['delete_flag'];
-			switch($delete_flag){
-				case 0:
-					echo '有効';
-					break;
-				case 1:
-					echo '無効';
-					break;
-			}
+					$delete_flag = $row['delete_flag'];
+						switch($delete_flag){
+							case 0:
+								echo '有効';
+								break;
+							case 1:
+								echo '無効';
+								break;
+						}
 			?>
 		
 		</td>
@@ -264,17 +368,13 @@
 		
 		<td>
 			<form method="post" action="update.php">
-			<input type="submit" name="update" value="更新">
+				<input type="submit" name="update" value="更新">
 				<input type="hidden" value="<?php echo $row['id']; ?>" name="id">
-				
 			</form>
 			
 			<form method="post" action="delete.php">
-			<input type="submit" name="delete" value="削除">
+				<input type="submit" name="delete" value="削除">
 				<input type="hidden" value="<?php echo $row['id']; ?>" name="id">
-				
-				
-				<!--idのデータを送ってdeleteのページでidを元にそのアカウントの情報を呼び出す-->
 			</form>
 				</td>
 	</tr>
@@ -283,34 +383,13 @@
 		//rowsは未定義（検索してヒットせず値が返ってきていない）、でも、family_nameには空であれなんであれ値が入っている（とりあえず検索ボタンが押される）
 		echo "該当するデータがありませんでした。";
 	}
-		
-				
-			}catch(PDOException $e){
-				echo '<div class="error">エラーが発生したため、アカウントを取得できませんでした。</div>';
-			}
+	/*}catch(PDOException $e){
+		echo '<div class="error">エラーが発生したため、アカウントを取得できませんでした。</div>';
+			}*/
 			
-			?>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</table>
-	
-	<footer>Copyright D.I.works| D.I.Blog is the one which provides A to Z about programming.</footer>
+											?>
 
-	
-	</body>
-
-
-
-
-
-
-
-
+</table>
+<footer>Copyright D.I.works| D.I.Blog is the one which provides A to Z about programming.</footer>
+</body>
 </html>

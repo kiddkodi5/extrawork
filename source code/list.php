@@ -154,17 +154,18 @@ if(!isset($row['mail'])){
 			<td>メールアドレス</td>	
 				<td><input type="text" name="mail" value="<?php if(isset($_POST['mail']) and isset($_POST['family_name'])){echo $_POST['mail'];} ?>"></td>
 			<td>性別</td>
-				<td><input type="radio" name="gender" value="0" <?php if(!isset($_POST['gender']) or $_POST['gender'] == 0){echo 'checked';}?>>男
+				<td><input type="radio" name="gender" value="0" <?php if(isset($_POST['gender'])){if($_POST['gender'] == 0){echo 'checked';}}?>>男
 					<input type="radio" name="gender" value="1" <?php if(isset($_POST['gender'])){if($_POST['gender'] == 1){echo 'checked';}}?>>女
-					<input type="radio" name="gender" value="2" <?php if(isset($_POST['gender'])){if($_POST['gender'] == 2){echo 'checked';}}?>>なし
+					<input type="radio" name="gender" value="2" <?php if(!isset($_POST['gender']) or $_POST['gender'] == 2){echo 'checked';}?>>なし
 				</td>
 		</tr>
 		<tr>
 			<td>権限</td>
 				<td><select class="dropdown" name="authority">
-						<option value="0" <?php if(!isset($_POST['authority']) or $_POST['authority'] == 0){echo 'selected';}?>>一般</option>
+						<option value="0" <?php if(isset($_POST['authority'])){if($_POST['authority'] == 0){echo 'selected';}}?>>一般</option>
 						<option value="1" <?php if(isset($_POST['authority'])){if($_POST['authority'] == 1){echo 'selected';}}?>>管理者</option>
-						<option value="2" <?php if(isset($_POST['authority'])){if($_POST['authority'] == 2){echo 'selected';}}?>>なし</option>
+						<option value="2" <?php if(!isset($_POST['authority']) or $_POST['authority'] == 2){echo 'selected';}?>>なし</option>
+						
 					</select>
 				</td>
 			<td><input type="submit" class="submit" value="検索"></td>
